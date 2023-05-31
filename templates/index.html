@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th class="text-start">Date</th>
+            <th class="text-start">Time</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <!-- TODO: Loop through the database entries to display them in this table -->
+
+        {% for appt in appts %}
+        <form action="/" method="POST">
+            <tr>
+
+                <td class="text-start">{{appt["date"]}}</td>
+                <td class="text-start">{{appt["time"]}}</td>
+
+                <input type="hidden" name="id" value="{{appt["id"]}}">
+                <td><button type="submit" class="btn btn-danger">Cancel</button></td>
+
+
+            </tr>
+        </form>
+
+
+        {% endfor %}
+    </tbody>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Appointment
+{% endblock %}
+{% block javascript %}
+
+{% endblock %}
+
+{% block main %}
+Make an appointment
+
+<div class="container">
+    <form action="/appointment" method="post">
+      <fieldset>
+      <div class="elem-group inlined">
+        <label for="checkin-date">Check-in Date</label>
+        <input type="date" id="checkin-date" class="bui-calendar__display"= name="date" required>
+      </div>
+            <div class="mb-3">
+
+            <label for="hours" id="label">Choose Time</label>
+            <select name="hours" id="hours">
+              <option selected="true" disabled="disabled">Choose Time</option>
+              <option>09:00</option>
+              <option>11:00</option>
+              <option>13:00</option>
+              <option>15:00</option>
+            </select>
+
+          </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </fieldset>
+          </form>
+
+
+</div>
+<style>
+
+fieldset{
+  margin:2em 0;
+  padding:1em 0;
+  border: solid 1px #ccc;
+  border-radius:6px;
+  min-width:200px;
+  background-color: #f0c0ee;
+  background: rgba(240,192,238,0.4);
+}
+label{
+  display: block;
+  margin-top:1em;
+}
+
+input,select{
+  padding: .5em;
+  border:solid 1px #999;
+}
+
+@media screen and (min-width:430px){
+  fieldset{
+    width:40%;
+    min-width:320px;
+    margin:auto;
+  }
+}
+</style>
+
+<script type="text/javascript">
+  var currentDateTime = new Date();
+var year = currentDateTime.getFullYear();
+var month = (currentDateTime.getMonth() + 1);
+var date = (currentDateTime.getDate() + 1);
+
+if(date < 10) {
+  date = '0' + date;
+}
+if(month < 10) {
+  month = '0' + month;
+}
+
+var dateTomorrow = year + "-" + month + "-" + date;
+var checkinElem = document.querySelector("#checkin-date");
+var checkoutElem = document.querySelector("#checkout-date");
+
+checkinElem.setAttribute("min", dateTomorrow);
+
+checkinElem.onchange = function () {
+    checkoutElem.setAttribute("min", this.value);
+}
+</script>
+
+{% endblock %}
